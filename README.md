@@ -14,33 +14,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+## Design Decisions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### State Management
+For this project I used React Context as the application is not complex enough to justify the use case for Redux or similar project. I would have gone with Redux Toolkit or React query if it was calling api frequently. 
 
-### `npm run build`
+For the purpose of this project I am maintaining the list of DataSources in State. The data sources are added as default state in the context - ideally it should be done through an api call. And when the User apply a data source to map and field is set to true and that layer is displayed in layer list. For the purpose of this project this approach works well but as the application will grow we might need to improve it by splitting it.
+### CSS in JS
+For styling I used Material UI. The UI is simple and didn't require much customization. I have used `style`` and `sx`` props of Material UI components when required. This is not the best approach but worked in this context. Ideally the styles should be applied using styled components through `styled` from '@mui/material/styles'. Also we could have created headless components first and then applied styles in a complex project. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Project Structure
+I have kept the structure minimal. The components folder contain the UI components. The structure is flat but ideally there could have been nesting to represent the relation between components. For example: DataSourceMenu -> DataSourceList -> DataSourceListItem etc. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Views folder contain the pages, layout that stich the components together and create a page.
