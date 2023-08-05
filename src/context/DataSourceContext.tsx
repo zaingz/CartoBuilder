@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, ReactNode } from "react";
+import React, { useReducer, createContext, useMemo, ReactNode } from "react";
 import { LayerContextProps } from "./DataSource";
 import dataSourceReducer from "./DataSourceReducer";
 import { dataSources } from "../api/getData";
@@ -16,8 +16,10 @@ export const DataSourceProvider: React.FC<LayerProviderProps> = ({
 }) => {
   const [state, dispatch] = useReducer(dataSourceReducer, dataSources);
 
+  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
   return (
-    <DataSourceContext.Provider value={{ state, dispatch }}>
+    <DataSourceContext.Provider value={value}>
       {children}
     </DataSourceContext.Provider>
   );
